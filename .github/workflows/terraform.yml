@@ -66,21 +66,21 @@ jobs:
         run: terraform validate
 
       - name: Terraform Destroy
-        if: steps.read-destroy-config.outputs.destroy == 'true'
+        if:  ${{ inputs.destroy == true }}
         id: terraform-destroy
         run: |
           terraform workspace select ${{ inputs.environment }} || terraform workspace new ${{ inputs.environment }}
           terraform destroy -auto-approve
 
       - name: Terraform Plan
-        if: steps.read-destroy-config.outputs.destroy != 'true'
+        if: ${{ inputs.destroy != true }}
         id: terraform-plan
         run: |
           terraform workspace select ${{ inputs.environment }} || terraform workspace new ${{ inputs.environment }}
           terraform plan -out="${{ inputs.environment }}.plan"
 
       - name: Terraform Apply
-        if: steps.read-destroy-config.outputs.destroy != 'true'
+        if: ${{ inputs.destroy != true }}
         id: terraform-apply
         run: |
           terraform workspace select ${{ inputs.environment }} || terraform workspace new ${{ inputs.environment }}
