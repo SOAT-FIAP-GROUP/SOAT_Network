@@ -4,6 +4,16 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment"
+        required: true
+        default: "dev"
+      destroy:
+        description: "Destroy resources"
+        required: false
+        default: "false"
 
 permissions:
   id-token: write
