@@ -6,10 +6,6 @@ on:
       - main
   workflow_dispatch:
     inputs:
-      environment:
-        description: "Environment"
-        required: true
-        default: "dev"
       destroy:
         description: "Destroy resources"
         required: false
@@ -28,5 +24,6 @@ jobs:
       aws-statefile-s3-bucket: "${{ vars.BUCKET_S3_NAME }}"
       aws-statefile-key: "network/terraform.tfstate"
       aws-lock-dynamodb-table: "${{ vars.DYNAMODB_TABLE }}"
+      destroy: ${{ github.event.inputs.destroy || false }}
     secrets:
       aws-assume-role-arn: ${{ secrets.AWS_ASSUME_ROLE_ARN_NETWORK }}
