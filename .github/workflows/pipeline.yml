@@ -1,0 +1,21 @@
+name: "Deploy terraform-network"
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  terraform:
+    uses: ./.github/workflows/terraform.yml
+    with:
+      environment: dev
+      aws-assume-role-arn: "arn:aws:iam::${{secrets.CONTA_AWS}}:role/githubActions-network"
+      aws-region: "${{variables.AWS_REGION}}"
+      aws-statefile-s3-bucket: "${{variables.BUCKET_S3_NAME}}"
+      aws-statefile-key: "network/terraform.tfstate"
+      aws-lock-dynamodb-table: "${{variables.DYNAMODB_TABLE}}"
