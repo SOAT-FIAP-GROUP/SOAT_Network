@@ -52,7 +52,7 @@ jobs:
       - name: Read destroy configuration
         id: read-destroy-config
         run: |
-          echo "destroy=${{ inputs.destroy }}" >> $GITHUB_OUTPUT
+          echo "destroy=$(if [ '${{ inputs.destroy }}' = true ]; then echo 'true'; else echo 'false'; fi)" >> $GITHUB_OUTPUT
 
       - name: Terraform Init
         run: |
