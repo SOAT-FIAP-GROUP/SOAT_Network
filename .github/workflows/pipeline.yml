@@ -14,8 +14,9 @@ jobs:
     uses: ./.github/workflows/terraform.yml
     with:
       environment: dev
-      aws-assume-role-arn: "${{ secrets.AWS_ASSUME_ROLE_ARN_NETWORK }}"
       aws-region: "${{ vars.AWS_REGION }}"
       aws-statefile-s3-bucket: "${{ vars.BUCKET_S3_NAME }}"
       aws-statefile-key: "network/terraform.tfstate"
       aws-lock-dynamodb-table: "${{ vars.DYNAMODB_TABLE }}"
+    secrets:
+      aws-assume-role-arn: ${{ secrets.AWS_ASSUME_ROLE_ARN_NETWORK }}
