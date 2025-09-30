@@ -24,9 +24,3 @@ variable "vpc_subnets_count" {
   type        = number
   default     = 2 # For EKS, you need at least two availability zones??
 }
-
-variable "container_image" {
-  description = "ECR image for k8s deployment"
-  type        = string
-  default     = ""
-}
