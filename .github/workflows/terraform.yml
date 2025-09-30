@@ -19,9 +19,9 @@ on:
         type: string
         required: true
       destroy:
-        type: boolean
+        type: string
         required: false
-        default: false
+        default: 'false'
     secrets:
       aws-assume-role-arn:
         required: true
@@ -61,21 +61,21 @@ jobs:
         run: terraform validate
 
       - name: Terraform Destroy
-        if:  ${{ inputs.destroy == true }}
+        if:  ${{ inputs.destroy == 'true' }}
         id: terraform-destroy
         run: |
           terraform workspace select ${{ inputs.environment }} || terraform workspace new ${{ inputs.environment }}
           terraform destroy -auto-approve
 
       - name: Terraform Plan
-        if: ${{ inputs.destroy != true }}
+        if: ${{ inputs.destroy != 'true' }}
         id: terraform-plan
         run: |
           terraform workspace select ${{ inputs.environment }} || terraform workspace new ${{ inputs.environment }}
           terraform plan -out="${{ inputs.environment }}.plan"
 
       - name: Terraform Apply
-        if: ${{ inputs.destroy != true }}
+        if: ${{ inputs.destroy != 'true' }}
         id: terraform-apply
         run: |
           terraform workspace select ${{ inputs.environment }} || terraform workspace new ${{ inputs.environment }}
