@@ -8,7 +8,7 @@ variable "local_name" {
   description = "Infra stack/cluster name and Environent for resources local name"
   type        = map(string)
   default = {
-    name = "lanchonete-app",
+    name = "haka-app",
     env  = "dev"
   }
 }
