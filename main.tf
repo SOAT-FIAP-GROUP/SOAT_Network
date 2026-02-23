@@ -23,23 +23,3 @@ module "vpc" {
 
   tags = local.tags
 }
-
-resource "aws_sqs_queue" "sqs_processar_video" {
-  name                      = "sqs-processar-video"
-  tags = local.tags
-}
-
-resource "aws_sqs_queue" "sqs_criar_status_processo" {
-  name                      = "sqs-criar-status-processo"
-  tags = local.tags
-}
-
-resource "aws_sqs_queue" "sqs_objeto_criado" {
-  name                      = "sqs-objeto-criado"
-  tags = local.tags
-}
-
-resource "aws_sqs_queue" "sqs_notificar_falha" {
-  name                      = "sqs-notificar-falha"
-  tags = local.tags
-}
